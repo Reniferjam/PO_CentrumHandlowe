@@ -1,2 +1,5 @@
-public interface IClient {
+public interface IClient
+{
+    public boolean checkProduct();
+    public void buyProduct();
 }

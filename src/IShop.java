@@ -1,2 +1,4 @@
-public interface IShop {
+public interface IShop
+{
+    public double sellProduct();
 }

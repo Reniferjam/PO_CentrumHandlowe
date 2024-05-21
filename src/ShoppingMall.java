@@ -1,4 +1,4 @@
-public class ShoppingMall
+public class ShoppingMall implements IShoppingMall
 {
     private  int numberOfClients, numberOfRounds;
     private Shop[] ShopList;
@@ -33,4 +33,7 @@ public class ShoppingMall
         numberOfClients=n;
     }
 
+    public void nextRound(){
+
+    }
 }

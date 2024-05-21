@@ -1,4 +1,4 @@
-public class Shop
+public class Shop implements IShop
 {
     private int shopCapacity;
     private double shopIncome;
@@ -7,39 +7,48 @@ public class Shop
     private Item[] itemList;
     private int currentCapacity;
 
-    private double sellProduct(){
+    public double sellProduct()
+    {
         return 0;
     }
 
-    private boolean checkCapacity(int current, int max){
+    private boolean checkCapacity(int current, int max)
+    {
         return true;
     }
 
-    public int getShopCapacity(){
+    public int getShopCapacity()
+    {
         return 0;
     }
 
-    public void setShopCapacity(int n){
+    public void setShopCapacity(int n)
+    {
 
     }
 
-    public double getShopIncome(){
+    public double getShopIncome()
+    {
         return 0;
     }
 
-    public void setShopTax(double n){
+    public void setShopTax(double n)
+    {
 
     }
 
-    public double getShopTax(){
+    public double getShopTax()
+    {
         return 0;
     }
 
-    public double getShopProfit(){
+    public double getShopProfit()
+    {
         return 0;
     }
 
-    public int getCurrentCapacity(){
+    public int getCurrentCapacity()
+    {
         return 0;
     }
 }

@@ -1,14 +1,14 @@
-public class Client
+public class Client implements IClient
 {
     private  Item[] shopList;
     private  int currentShopID, currentProductID;
 
-    private boolean checkProduct()
+    public boolean checkProduct()
     {
         return true;
     }
 
-    private void buyProduct()
+    public void buyProduct()
     {
 
     }

@@ -1,2 +1,4 @@
-public interface IShoppingMall {
+public interface IShoppingMall
+{
+    public void nextRound();
 }
