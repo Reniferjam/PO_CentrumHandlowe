@@ -1,7 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class ShoppingMall implements IShoppingMall
 {
     private  int numberOfClients, numberOfRounds;
-    private Shop[] ShopList;
+
+    List<Shop> shopList = new ArrayList<Shop>();
 
     private int randNumberOfClients()
     {
@@ -33,7 +37,16 @@ public class ShoppingMall implements IShoppingMall
         numberOfClients=n;
     }
 
+    public int getNumberOfShops(){
+        return shopList.size();
+    }
+
     public void nextRound(){
+
+    }
+
+    public static void main(String[] args)
+    {
 
     }
 }
