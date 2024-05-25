@@ -5,7 +5,15 @@ public class Shop implements IShop
     private double shopTax;
     private double shopProfit;
     private Item[] itemList;
-    private int currentCapacity;
+    private int currentCapacity = 0;
+
+    private Shop(double shopIncome, double shopTax, double shopProfit, Item[] itemlist, int currentCapacity){
+        this.shopIncome = shopIncome;
+        this.shopTax = shopTax;
+        this.shopProfit = shopProfit;
+        this.itemList = itemlist;
+        this.currentCapacity = 0;
+    }
 
     public double sellProduct()
     {

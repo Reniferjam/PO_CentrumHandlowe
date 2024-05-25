@@ -12,7 +12,6 @@ public class Client implements IClient
     {
 
     }
-
     public int getCurrentProductID()
     {
         return currentProductID;

@@ -2,9 +2,9 @@ public class Random extends Client
 {
     public int randomShopID;
 
-    private int findRandomShop()
+    public int findRandomShop(int numberOfShops)
     {
-        //randomShopID = (int)(Math.random() * (max-1+1)) + 1;  znalezc ilosc sklepow (max)
+        randomShopID = (int)(Math.random() * (numberOfShops));  //znalezc ilosc sklepow (max)
         return randomShopID;
     }
 
