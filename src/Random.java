@@ -4,11 +4,12 @@ public class Random extends Client
 
     private int findRandomShop()
     {
-        return 0;
+        //randomShopID = (int)(Math.random() * (max-1+1)) + 1;  znalezc ilosc sklepow (max)
+        return randomShopID;
     }
 
-    private int getRandomShopID()
+    public int getRandomShopID()
     {
-        return 0;
+        return randomShopID;
     }
 }

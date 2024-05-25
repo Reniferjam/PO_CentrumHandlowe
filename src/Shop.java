@@ -19,7 +19,7 @@ public class Shop implements IShop
 
     public int getShopCapacity()
     {
-        return 0;
+        return shopCapacity;
     }
 
     public void setShopCapacity(int n)
@@ -29,7 +29,7 @@ public class Shop implements IShop
 
     public double getShopIncome()
     {
-        return 0;
+        return shopIncome;
     }
 
     public void setShopTax(double n)
@@ -39,16 +39,16 @@ public class Shop implements IShop
 
     public double getShopTax()
     {
-        return 0;
+        return shopTax;
     }
 
     public double getShopProfit()
     {
-        return 0;
+        return shopProfit;
     }
 
     public int getCurrentCapacity()
     {
-        return 0;
+        return currentCapacity;
     }
 }

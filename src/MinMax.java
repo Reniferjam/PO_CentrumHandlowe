@@ -9,6 +9,6 @@ public class MinMax extends Client
 
     private int getBestShopID()
     {
-        return 0;
+        return bestShopID;
     }
 }
