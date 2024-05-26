@@ -69,7 +69,8 @@ public class Item
         int ID =  0; // giveID();
 
         int quantity;
-        do {
+        do
+        {
             System.out.println("Podaj ilość produktów [>0] : ");
             quantity = scan.nextInt();
             scan.nextLine();

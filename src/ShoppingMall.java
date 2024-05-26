@@ -82,7 +82,6 @@ public class ShoppingMall implements IShoppingMall
         for (int i = 0; i < numberOfClients; i++)
         {
 
-
         }
         numberOfRounds++;
     }

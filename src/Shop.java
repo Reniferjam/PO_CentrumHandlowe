@@ -34,6 +34,8 @@ public class Shop implements IShop
         shopProfit = shopIncome*0.01; // ogarnij
         currentCapacity++;
 
+
+
         return 0;
     }
 
@@ -86,6 +88,7 @@ public class Shop implements IShop
 
     public double sellProduct()
     {
+
         return 0;
     }
 
@@ -96,15 +99,32 @@ public class Shop implements IShop
 
 
         Scanner scan = new Scanner(System.in);
-        System.out.println("Set Shop Tax 1-100 [%]: ");
-        int Tax = scan.nextInt();
+        int Tax;
+        do
+        {
+            System.out.println("Set Shop Tax 1-100 [%]: ");
+            Tax = scan.nextInt();
+            scan.nextLine();
+            if (Tax < 1 || Tax > 100)
+            {
+                System.out.println("Wrong data");
+            }
+        } while (Tax < 1 || Tax > 100);
 
-        System.out.println("Set Shop Capacity >0: ");
-        int Capacity = scan.nextInt();
+        int Capacity;
+        do
+        {
+            System.out.println("Set Shop Capacity [>0]: ");
+            Capacity = scan.nextInt();
+            scan.nextLine();
+            if (Capacity <= 0)
+            {
+                System.out.println("Wrong data");
+            }
+        } while (Capacity <= 0);
 
 
-
-        System.out.println("Set number of Shop products: ");
+        System.out.println("Set number of Shop products: ");        //mozna ustawic bramke na ilosc produktow
         int numberOfProducts = scan.nextInt();
         Item[] list = new Item[numberOfProducts];
         for (int i = 0; i < numberOfProducts; i++)
