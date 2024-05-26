@@ -25,43 +25,48 @@ public class Item
         this.itemPrice = -1;
     }
 
-    public String getItemName() {
+    public String getItemName()
+    {
         return itemName;
     }
 
-    public int getItemID() {
+    public int getItemID()
+    {
         return itemID;
     }
 
-    public int getItemQuality() {
+    public int getItemQuality()
+    {
         return itemQuality;
     }
 
-    public double getItemPrice() {
+    public double getItemPrice()
+    {
         return itemPrice;
     }
 
-    public int getItemQuantity() {
+    public int getItemQuantity()
+    {
         return itemQuantity;
     }
 
-    public void setItemQuantity(int itemQuantity) {
+    public int giveID(Item[] shopList)
+    {
+        return itemID; // do poprawki
+    }
+
+    public void setItemQuantity(int itemQuantity)
+    {
         this.itemQuantity = itemQuantity;
     }
 
-    public  void decreaseQuantity(){
-        itemQuantity--;
-    }
-
-    public static Item createItem(){
+    public static Item createItem()
+    {
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj nazwę produktu: ");
         String name = scan.nextLine();
         name = name.toLowerCase();
-
-
         int ID =  0; // giveID();
-
 
         int quantity;
         do {
@@ -113,18 +118,80 @@ public class Item
         System.out.println("Price:  " + item.itemPrice);
 
     }
-
-    public int giveID(Item[] shopList)
+    public static Item createExampleItemA1()
     {
-        return 0;
+        System.out.println("Item: createExampleItemA1");
+        System.out.println();
+
+        String name = "Buty";
+        int ID = 1;
+        int quantity = 5;
+        int quality = 70;
+        double price = 499.99;
+        return new Item(name,ID,quantity,quality,price);
     }
 
-    public static void main(String[] args)
+    public static Item createExampleItemA2()
     {
-        Item item = createItem();
-        printItem(item);
+        System.out.println("Item: createExampleItemA2");
+        System.out.println();
 
-        Item XD = createItem();
-        printItem(XD);
+        String name = "Spodnie";
+        int ID = 2;
+        int quantity = 10;
+        int quality = 65;
+        double price = 175.99;
+        return new Item(name,ID,quantity,quality,price);
+    }
+
+    public static Item createExampleItemB1()
+    {
+        System.out.println("Item: createExampleItemB1");
+        System.out.println();
+
+        String name = "Buty";
+        int ID = 1;
+        int quantity = 3;
+        int quality = 40;
+        double price = 250.99;
+        return new Item(name,ID,quantity,quality,price);
+    }
+
+    public static Item createExampleItemB2()
+    {
+        System.out.println("Item: createExampleItemB2");
+        System.out.println();
+
+        String name = "Spodnie";
+        int ID = 2;
+        int quantity = 5;
+        int quality = 40;
+        double price = 99.99;
+        return new Item(name, ID, quantity, quality, price);
+    }
+
+    public static Item createExampleItemClient1()
+    {
+        System.out.println("Item: createExampleItemClient1");
+        System.out.println();
+
+        String name = "Spodnie";
+        int ID = 2;
+        int quantity = 3;
+        int quality = 30;
+        double price = 120;
+        return new Item(name, ID, quantity, quality, price);
+    }
+    public static Item createExampleItemClient2()
+    {
+        System.out.println("Item: createExampleItemClient2");
+        System.out.println();
+
+        String name = "Buty";
+        int ID = 1;
+        int quantity = 2;
+        int quality = 65;
+        double price = 400;
+        return new Item(name, ID, quantity, quality, price);
     }
 }

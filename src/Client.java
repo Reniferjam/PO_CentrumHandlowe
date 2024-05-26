@@ -1,40 +1,59 @@
 public class Client implements IClient
 {
     private int currentShopID, currentProductID;
-    private Item item;
+    public Item item;
 
-    public Client(){
+    public Client(Item item)
+    {
         this.currentProductID = 0;
         this.currentShopID = 0;
-        this.item = Item.createItem();
+        this.item = item;
     }
 
-    public boolean checkProduct()
+
+        public void buyProduct ()
+        {
+
+        }
+        public int getCurrentProductID ()
+        {
+            return currentProductID;
+        }
+
+        public int getCurrentShopID ()
+        {
+            return currentShopID;
+        }
+
+        public Item getItem () {
+            return item;
+        }
+
+        public void setCurrentShopID ( int currentShopID){
+            this.currentShopID = currentShopID;
+        }
+
+        public boolean checkProduct()
+        {
+
+            return true;
+        }
+
+
+//    public int findRandomShop(int n)
+//    {
+//        //urrentShopID = (int) (Math.random() * (shoppingMall.));
+//    }
+
+    public static Client createExampleClient1()
     {
-        return true;
+        Item item = Item.createExampleItemClient1();
+        return new Client(item);
     }
 
-    public void buyProduct()
+    public static Client createExampleClient2()
     {
-
-    }
-    public int getCurrentProductID()
-    {
-        return currentProductID;
-    }
-
-    public int getCurrentShopID()
-    {
-        return currentShopID;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public static void main(String[] args)
-    {
-        Client klient = new Client();
-
+        Item item = Item.createExampleItemClient2();
+        return new Client(item);
     }
 }

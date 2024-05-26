@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public abstract class Shop implements IShop
+public class Shop implements IShop
 {
     private int shopCapacity;
     private double shopIncome;
@@ -10,9 +11,11 @@ public abstract class Shop implements IShop
     private int currentCapacity = 0;
     private int itemID;
 
-    List<Item> itemList = new ArrayList<Item>();
+    private int itemNumber;
 
-    private Shop(int shopTax, double shopProfit, List<Item> itemList, int shopCapacity)
+    Item[] itemList;
+
+    private Shop(int shopTax, Item[] itemList, int shopCapacity, int itemNumber)
     {
         this.shopIncome = 0;
         this.shopTax = shopTax;
@@ -21,22 +24,14 @@ public abstract class Shop implements IShop
         this.shopCapacity = shopCapacity;
         this.currentCapacity = 0;
         this.itemID = 0;
+        this.itemNumber = itemNumber;
     }
 
-    public void addItem()
-    {
-        Item item = Item.createItem();
-        itemList.add(item);
-    }
 
     public double sellProduct(Client client)
     {
         shopIncome+=client.getItem().getItemPrice();
-        shopProfit = shopIncome*shopTax*0.01;
-        Item item = itemList.get(itemID);
-        item.decreaseQuantity();
-        itemList.remove(itemID);
-        itemList.add(item);
+        shopProfit = shopIncome*0.01; // ogarnij
         currentCapacity++;
 
         return 0;
@@ -70,6 +65,10 @@ public abstract class Shop implements IShop
 
     }
 
+    public void setCurrentCapacity(int currentCapacity) {
+        this.currentCapacity = currentCapacity;
+    }
+
     public double getShopTax()
     {
         return shopTax;
@@ -85,8 +84,53 @@ public abstract class Shop implements IShop
         return currentCapacity;
     }
 
-    public static void main(String[] args)
+    public double sellProduct()
     {
-        //Shop Shop1 = new Shop(0, 20, 0, itemList[0], 0);
+        return 0;
+    }
+
+    public static  Shop createShop()
+    {
+        System.out.println("Shop: createShop");
+        System.out.println();
+
+
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Set Shop Tax 1-100 [%]: ");
+        int Tax = scan.nextInt();
+
+        System.out.println("Set Shop Capacity >0: ");
+        int Capacity = scan.nextInt();
+
+
+
+        System.out.println("Set number of Shop products: ");
+        int numberOfProducts = scan.nextInt();
+        Item[] list = new Item[numberOfProducts];
+        for (int i = 0; i < numberOfProducts; i++)
+        {
+            list[i] = Item.createItem();
+        }
+        return new Shop(Tax,list,Capacity,numberOfProducts);
+    }
+
+    public static Shop createExampleShopA()
+    {
+        Item[] list = new Item[2];
+
+        list[0] = Item.createExampleItemA1();
+        list[1] = Item.createExampleItemA2();
+
+        return new Shop(20,list,5,2);
+    }
+
+    public static Shop createExampleShopB()
+    {
+        Item[] list = new Item[2];
+
+        list[0] = Item.createExampleItemB1();
+        list[1] = Item.createExampleItemB2();
+
+        return new Shop(40,list,10,2);
     }
 }
