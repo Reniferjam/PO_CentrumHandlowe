@@ -116,5 +116,7 @@ public class ShoppingMall implements IShoppingMall
     {
         Client client1 = Client.createExampleClient1();
         Client client2 = Client.createExampleClient2();
+        client1.checkProduct(shopList[0].getItemList(), shopList[0].getNumberOfProducts());
+
     }
 }

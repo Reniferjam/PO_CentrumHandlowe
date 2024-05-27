@@ -13,16 +13,36 @@ public class Client implements IClient
 
     public void buyProduct ()
     {
-        while (item.getItemQuantity() > 0){
+        System.out.println("Client: buyProduct");
+        System.out.println();
+
+        while (item.getItemQuantity() > 0)
+        {
             item.setItemQuantity(item.getItemQuantity()-1);
             System.out.println("Bought one item. Remaining quantity: " + item.getItemQuantity());
         }
     }
 
-    public boolean checkProduct()
+    public boolean checkProduct(Item[] ItemList, int numberOfProducts)
     {
+        boolean available = false;
 
-        return true;
+        if (ItemList[0].getItemQuantity() > 0)
+        {
+            available = true;
+        }
+
+        if (item.getItemPrice() <= ItemList[0].getItemPrice())
+        {
+            available = true;
+        } else available = false;
+
+        if (item.getItemQuality() >= ItemList[0].getItemQuality())
+        {
+            available = true;
+        } else available = false;
+
+        return available;
     }
 
         public int getCurrentProductID ()
@@ -48,6 +68,10 @@ public class Client implements IClient
 //    {
 //        //currentShopID = (int) (Math.random() * (shoppingMall.));
 //    }
+
+    public int decreaseQuantity(Item[] ItemList){
+        return 0;
+    }
 
     public static Client createExampleClient1()
     {

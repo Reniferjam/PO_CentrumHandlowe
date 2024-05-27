@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Shop implements IShop
@@ -11,11 +9,11 @@ public class Shop implements IShop
     private int currentCapacity = 0;
     private int itemID;
 
-    private int itemNumber;
+    private int numberOfProducts;
 
     Item[] itemList;
 
-    private Shop(int shopTax, Item[] itemList, int shopCapacity, int itemNumber)
+    private Shop(int shopTax, Item[] itemList, int shopCapacity, int numberOfProducts)
     {
         this.shopIncome = 0;
         this.shopTax = shopTax;
@@ -24,18 +22,24 @@ public class Shop implements IShop
         this.shopCapacity = shopCapacity;
         this.currentCapacity = 0;
         this.itemID = 0;
-        this.itemNumber = itemNumber;
+        this.numberOfProducts = numberOfProducts;
     }
 
 
     public double sellProduct(Client client)
     {
-        shopIncome+=client.getItem().getItemPrice();
-        shopProfit = shopIncome*0.01; // ogarnij
+        System.out.println("Shop: sellProduct");
+        System.out.println();
+
+        shopIncome += client.getItem().getItemPrice();
+        shopProfit = shopIncome + shopIncome*shopTax*0.01;
         currentCapacity++;
 
-
-
+        while (client.getItem().getItemQuantity() > 0)
+        {
+            client.getItem().setItemQuantity(client.getItem().getItemQuantity()-1);
+            System.out.println("Sold one item. Remaining quantity: " + client.getItem().getItemQuantity());
+        }
         return 0;
     }
 
@@ -86,10 +90,12 @@ public class Shop implements IShop
         return currentCapacity;
     }
 
-    public double sellProduct()
-    {
+    public Item[] getItemList() {
+        return itemList;
+    }
 
-        return 0;
+    public int getNumberOfProducts() {
+        return numberOfProducts;
     }
 
     public static  Shop createShop()
