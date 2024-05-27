@@ -1,4 +1,4 @@
 public interface IShop
 {
-    public double sellProduct();
+    public void sellProduct(int n,Client client);
 }

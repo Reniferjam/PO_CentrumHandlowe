@@ -23,26 +23,32 @@ public class Client implements IClient
         }
     }
 
-    public boolean checkProduct(Item[] ItemList, int numberOfProducts)
+    public boolean checkProduct(Item ShopItem, int numberOfProducts)
     {
-        boolean available = false;
+        System.out.println("Client: checkProduct");
+        System.out.println();
 
-        if (ItemList[0].getItemQuantity() > 0)
+        if (ShopItem.getItemQuantity() < 0)
         {
-            available = true;
+            return false;
         }
 
-        if (item.getItemPrice() <= ItemList[0].getItemPrice())
+        if(ShopItem.getItemID() != item.getItemID())
         {
-            available = true;
-        } else available = false;
+            return false;
+        }
 
-        if (item.getItemQuality() >= ItemList[0].getItemQuality())
+        if (item.getItemPrice() < ShopItem.getItemPrice())
         {
-            available = true;
-        } else available = false;
+            return false;
+        }
 
-        return available;
+        if (item.getItemQuality() > ShopItem.getItemQuality())
+        {
+            return false;
+        }
+
+        return true;
     }
 
         public int getCurrentProductID ()

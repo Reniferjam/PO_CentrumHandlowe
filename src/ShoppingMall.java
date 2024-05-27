@@ -90,10 +90,8 @@ public class ShoppingMall implements IShoppingMall
         System.out.println("Shopping Mall: initExampleShops");
         System.out.println();
 
-        for (int i = 0; i < numberOfShops; i+=2) {
-            addExampleShopA(i);
-            addExampleShopB(i+1);
-        }
+        addExampleShopA(0);
+        addExampleShopB(1);
     }
 
     public void addExampleShopA(int n)
@@ -116,7 +114,69 @@ public class ShoppingMall implements IShoppingMall
     {
         Client client1 = Client.createExampleClient1();
         Client client2 = Client.createExampleClient2();
-        client1.checkProduct(shopList[0].getItemList(), shopList[0].getNumberOfProducts());
+        for (int i = 0; i < shopList[0].getNumberOfProducts(); i++)
+        {  // Client 1 i Shop A
+            if (client1.checkProduct(shopList[0].getItem(i), shopList[0].getNumberOfProducts()))
+            {
+                System.out.println("Shop A");
+                shopList[0].sellProduct(i,client1);
+            }
+        }
 
+        for (int i = 0; i < shopList[1].getNumberOfProducts(); i++)
+        { // Client 1 i Shop ^(1 + B2)^
+            if (client1.checkProduct(shopList[1].getItem(i), shopList[1].getNumberOfProducts()))
+            {
+                System.out.println("Shop B");
+                shopList[1].sellProduct(i,client1);
+            }
+        }
+
+        for (int i = 0; i < shopList[0].getNumberOfProducts(); i++)
+        { // Client 2 i Shop A
+            if (client2.checkProduct(shopList[0].getItem(i), shopList[0].getNumberOfProducts()))
+            {
+                System.out.println("Shop A");
+                shopList[0].sellProduct(i,client2);
+            }
+        }
+
+
+        for (int i = 0; i < shopList[1].getNumberOfProducts(); i++)
+        { // Client 2 i Shop B (should work)
+            if (client2.checkProduct(shopList[1].getItem(i), shopList[1].getNumberOfProducts()))
+            {
+                System.out.println("Shop B");
+                shopList[1].sellProduct(i,client2);
+            }
+        }
+
+        System.out.println();
+        System.out.println("Client1 Item");
+        Item.printItem(client1.getItem());
+
+        System.out.println();
+
+        System.out.println("Client2 Item");
+        Item.printItem(client2.getItem());
+
+        System.out.println();
+        System.out.println("ShopA");
+        shopList[0].printShop();
+        System.out.println();
+        for (int i = 0; i < shopList[0].getNumberOfProducts(); i++) {
+            System.out.println("ShopA Product: " +i);
+            Item.printItem(shopList[0].getItem(i));
+            System.out.println();
+        }
+
+        System.out.println("ShopB");
+        shopList[1].printShop();
+        System.out.println();
+        for (int i = 0; i < shopList[1].getNumberOfProducts(); i++) {
+            System.out.println("ShopB Product: " +i);
+            Item.printItem(shopList[1].getItem(i));
+            System.out.println();
+        }
     }
 }

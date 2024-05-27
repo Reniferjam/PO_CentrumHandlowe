@@ -60,6 +60,8 @@ public class Item
         this.itemQuantity = itemQuantity;
     }
 
+
+
     public static Item createItem()
     {
         Scanner scan = new Scanner(System.in);
@@ -192,7 +194,7 @@ public class Item
         int ID = 1;
         int quantity = 2;
         int quality = 65;
-        double price = 400;
+        double price = 500;
         return new Item(name, ID, quantity, quality, price);
     }
 }

@@ -26,21 +26,34 @@ public class Shop implements IShop
     }
 
 
-    public double sellProduct(Client client)
+    public void sellProduct(int n,Client client)
     {
         System.out.println("Shop: sellProduct");
         System.out.println();
 
-        shopIncome += client.getItem().getItemPrice();
-        shopProfit = shopIncome + shopIncome*shopTax*0.01;
-        currentCapacity++;
 
-        while (client.getItem().getItemQuantity() > 0)
-        {
-            client.getItem().setItemQuantity(client.getItem().getItemQuantity()-1);
-            System.out.println("Sold one item. Remaining quantity: " + client.getItem().getItemQuantity());
-        }
-        return 0;
+        System.out.println("Sold " + client.getItem().getItemQuantity() + " " + client.getItem().getItemName());
+        System.out.println();
+
+        shopIncome+=  ( itemList[n].getItemPrice() ) *  client.getItem().getItemQuantity();
+        itemList[n].setItemQuantity(itemList[n].getItemQuantity() - client.getItem().getItemQuantity());
+        client.item.setItemQuantity(0);
+        currentCapacity++;
+        shopProfit=shopIncome * (100 - shopTax) / 100;
+        printShop();
+    }
+
+    public void printShop()
+    {
+        System.out.println("Tax: " + shopTax);
+        System.out.printf("Profit: %.2f" ,shopIncome); // do poprawy
+        System.out.println();
+        System.out.printf("Income: %.2f" ,shopProfit); // do poprawy
+        System.out.println();
+        System.out.println("Capacity: " +currentCapacity);
+        System.out.println("MaxCapacity:" +shopCapacity);
+        System.out.println();
+
     }
 
 //    private boolean checkCapacity(int current, int max)
@@ -94,6 +107,10 @@ public class Shop implements IShop
         return itemList;
     }
 
+    public Item getItem(int n)
+    {
+        return itemList[n];
+    }
     public int getNumberOfProducts() {
         return numberOfProducts;
     }

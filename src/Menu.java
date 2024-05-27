@@ -44,7 +44,7 @@ public class Menu
     {
         Scanner scan = new Scanner(System.in);
         System.out.println("Set number of shops: (2)");
-        return  scan.nextInt();
+        return  2; // scan.nextInt()
     }
 
     public void setNumberOfShops(int numberOfShops)
@@ -71,7 +71,7 @@ public class Menu
         ShoppingMall shoppingMall = new ShoppingMall(NumberOfShops);
         /////////////////////////
         shoppingMall.initExampleShops();
-        shoppingMall.nextRound();
+        shoppingMall.nextExampleRound();
         /////////////////////////
 
     }
