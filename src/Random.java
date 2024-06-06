@@ -7,4 +7,11 @@ public class Random extends Client
     {
         super(item);
     }
+
+    //funkcja losujaca numer sklepu
+
+    public int randomShop()
+    {
+        return (int)(Math.random()*1); //1 - zamienic na liczbe sklepow
+    }
 }

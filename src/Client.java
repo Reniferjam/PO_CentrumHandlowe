@@ -11,7 +11,7 @@ public class Client implements IClient
     }
 
 
-    public void buyProduct ()
+    public void buyProduct()
     {
         System.out.println("Client: buyProduct");
         System.out.println();
@@ -23,7 +23,7 @@ public class Client implements IClient
         }
     }
 
-    public boolean checkProduct(Item ShopItem, int numberOfProducts)
+    public boolean checkProduct(Item ShopItem)
     {
         System.out.println("Client: checkProduct");
         System.out.println();
@@ -51,44 +51,25 @@ public class Client implements IClient
         return true;
     }
 
-        public int getCurrentProductID ()
+    public int getCurrentProductID ()
         {
             return currentProductID;
         }
 
-        public int getCurrentShopID ()
-        {
-            return currentShopID;
-        }
+    public int getCurrentShopID ()
+    {
+        return currentShopID;
+    }
 
-        public Item getItem () {
+    public Item getItem () {
             return item;
         }
 
-        public void setCurrentShopID ( int currentShopID){
+    public void setCurrentShopID ( int currentShopID){
             this.currentShopID = currentShopID;
         }
-
-
-//    public int findRandomShop(int n)
-//    {
-//        //currentShopID = (int) (Math.random() * (shoppingMall.));
-//    }
 
     public int decreaseQuantity(Item[] ItemList){
         return 0;
     }
-
-    public static Client createExampleClient1()
-    {
-        Item item = Item.createExampleItemClient1();
-        return new Client(item);
-    }
-
-    public static Client createExampleClient2()
-    {
-        Item item = Item.createExampleItemClient2();
-        return new Client(item);
-    }
-
 }

@@ -7,7 +7,7 @@ public class Item
     private int itemID, itemQuantity, itemQuality;
     private double itemPrice;
 
-    private Item(String itemName, int itemID, int itemQuantity, int itemQuality, double itemPrice)
+    Item(String itemName, int itemID, int itemQuantity, int itemQuality, double itemPrice)
     {
         this.itemName = itemName;
         this.itemID = itemID;
@@ -62,55 +62,55 @@ public class Item
 
 
 
-    public static Item createItem()
-    {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Podaj nazwę produktu: ");
-        String name = scan.nextLine();
-        name = name.toLowerCase();
-        int ID =  0; // giveID();
-
-        int quantity;
-        do
-        {
-            System.out.println("Podaj ilość produktów [>0] : ");
-            quantity = scan.nextInt();
-            scan.nextLine();
-            if (quantity <= 0)
-            {
-                System.out.println("Podano złą wartość");
-            }
-
-        } while (quantity <= 0);
-
-        int quality;                    //dodac exception zeby nie wywalalo ulamkow
-        do {
-            System.out.println("Podaj jakość produktu [1;100] : ");
-            quality = scan.nextInt();
-            scan.nextLine();
-            if (quality < 1 || quality > 100)
-            {
-                System.out.println("Podano złą wartość");
-            }
-
-        } while (quality < 1 || quality > 100);
-
-        double price;
-        do {
-            System.out.println("Podaj cene produktu [>0] : ");
-            price = scan.nextDouble();
-            scan.nextLine();
-            if (price <= 0)
-            {
-                System.out.println("Podano złą wartość");
-            }
-
-        } while (price <= 0);
-
-        Item item1 = new Item(name,ID,quantity,quality,price);
-        ID++;
-        return item1;
-    }
+//    public static Item createItem()
+//    {
+//        Scanner scan = new Scanner(System.in);
+//        System.out.println("Podaj nazwę produktu: ");
+//        String name = scan.nextLine();
+//        name = name.toLowerCase();
+//        int ID =  0; // giveID();
+//
+//        int quantity;
+//        do
+//        {
+//            System.out.println("Podaj ilość produktów [>0] : ");
+//            quantity = scan.nextInt();
+//            scan.nextLine();
+//            if (quantity <= 0)
+//            {
+//                System.out.println("Podano złą wartość");
+//            }
+//
+//        } while (quantity <= 0);
+//
+//        int quality;                    //dodac exception zeby nie wywalalo ulamkow
+//        do {
+//            System.out.println("Podaj jakość produktu [1;100] : ");
+//            quality = scan.nextInt();
+//            scan.nextLine();
+//            if (quality < 1 || quality > 100)
+//            {
+//                System.out.println("Podano złą wartość");
+//            }
+//
+//        } while (quality < 1 || quality > 100);
+//
+//        double price;
+//        do {
+//            System.out.println("Podaj cene produktu [>0] : ");
+//            price = scan.nextDouble();
+//            scan.nextLine();
+//            if (price <= 0)
+//            {
+//                System.out.println("Podano złą wartość");
+//            }
+//
+//        } while (price <= 0);
+//
+//        Item item1 = new Item(name,ID,quantity,quality,price);
+//        ID++;
+//        return item1;
+//    }
 
     public static void printItem(Item item)
     {

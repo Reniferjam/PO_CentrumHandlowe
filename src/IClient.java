@@ -1,5 +1,5 @@
 public interface IClient
 {
-    public boolean checkProduct(Item ShopItem, int numberOfProducts);
+    public boolean checkProduct(Item ShopItem);
     public void buyProduct();
 }

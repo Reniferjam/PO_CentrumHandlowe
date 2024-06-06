@@ -9,6 +9,7 @@ public class MinMax extends Client
 
     private int findBestShop()
     {
+        //tabela -> zapamietanie cen z ktorych checkproduct daje true -> wybranie najnizszej ceny -> wybranie id sklepu z ktorego ten item jest
         return 0;
     }
 
@@ -16,4 +17,5 @@ public class MinMax extends Client
     {
         return bestShopID;
     }
+
 }
