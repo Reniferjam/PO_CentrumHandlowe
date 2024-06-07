@@ -3,14 +3,22 @@ public class Random extends Client
     public boolean[] RandomShopList;
     private int randomShopID;
 
-    public Random(Item item)
+    private int visitedShops;
+
+    public Random(Item item,int numberOfShops)
     {
         super(item);
+        this.RandomShopList = new boolean[numberOfShops];
+        this.randomShopID = randomShop(numberOfShops);
+        this.visitedShops = 0;
     }
 
-    public void randomShop()
+    public int randomShop(int numberOfShops) // +1 modulo numberOfShops do dokonczenia
     {
-        randomShopID = (int)(Math.random()*1); //1 - zamienic na liczbe sklepow
+
+        randomShopID = (int)(Math.random()*( numberOfShops ));
+        this.visitedShops++;
+        return randomShopID; //1 - zamienic na liczbe sklepow
     }
 
     public int getRandomShopID()

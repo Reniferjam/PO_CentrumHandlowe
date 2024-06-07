@@ -5,15 +5,20 @@ public class ShoppingMall implements IShoppingMall
 {
     private  int numberOfClients, numberOfRounds;
 
-    private int chanceOfRandomClient = 30;
-    private int minQuality = 20, maxQuality = 80;
-    private double minPrice = 100, maxPrice = 300;
+    private int chanceOfRandomClient;
+    private int minQuality, maxQuality;
+    private double minPrice, maxPrice;
 
     public static int numberOfShops;
 
     public Shop[] shopList;
-    public ShoppingMall(int numberOfShops)
+    public ShoppingMall(int numberOfShops, int chanceOfRandomClient, int minQuality, int maxQuality, int minPrice, int maxPrice)
     {
+        this.chanceOfRandomClient = chanceOfRandomClient;
+        this.minPrice = minPrice;
+        this.maxPrice = maxPrice;
+        this.minQuality = minQuality;
+        this.maxQuality = maxQuality;
         this.numberOfClients = 0;
         this.numberOfRounds = 0;
         this.numberOfShops = numberOfShops;
@@ -39,13 +44,6 @@ public class ShoppingMall implements IShoppingMall
         return numberOfShops;
     }
 
-
-    private int randNumberOfClients()
-     {
-        int n=1; // Do zmiany: Napisanie funkcji wylosowania liczby klientów
-        return n;
-    }
-
     private void resetCapacity()
     {
         for (int i = 0; i < numberOfShops; i++)
@@ -53,19 +51,6 @@ public class ShoppingMall implements IShoppingMall
             shopList[i].setShopCapacity(0);
         }
     }
-
-//    private void randomORminmax(int chanceOfRandomClient)
-//    {
-//        int x = (int)(Math.random() * (101));
-//
-//        if (x < chanceOfRandomClient)
-//        {
-//            generateRandom(); //returnuje randoma
-//        } else {
-//            generateMinMax(); //returnuje minmaxa
-//        }
-//    }
-
     public void initShops(Shop shop)
     {
         System.out.println("Shopping Mall: initShops");
@@ -90,12 +75,13 @@ public class ShoppingMall implements IShoppingMall
 
         for (int i = 0; i < getNumberOfClients(); i++)
         {
-            int x = (int)(Math.random() * (101));
+            int x = (int)(Math.random() * (101)); // losuje liczbe od 0 do 100
             if (x < chanceOfRandomClient)
             {
                 roundForRandom();
-            } else {
-                MinMax minmax = new MinMax(randomizeVariables(maxQuality, minQuality, maxPrice, minPrice));
+            } else
+            {
+                roundForMinMax();
             }
 
 
@@ -106,7 +92,7 @@ public class ShoppingMall implements IShoppingMall
 
     public void roundForRandom()
     {
-        Random rand = new Random(randomizeVariables(maxQuality, minQuality, maxPrice, minPrice));
+        Random rand = new Random(randomizeVariables(maxQuality, minQuality, maxPrice, minPrice),numberOfShops);
 
         //znalezione id sklepu
 
@@ -117,6 +103,18 @@ public class ShoppingMall implements IShoppingMall
                 shopList[0].sellProduct(i,rand);
             }
         }
+    }
+
+    public void roundForMinMax()
+    {
+        MinMax minmax = new MinMax(randomizeVariables(maxQuality, minQuality, maxPrice, minPrice));
+        minmax.setBestShopID(shopList);
+        if(minmax.getBestShopID() == -1)
+        {
+            System.out.println("There is no shop that have MinMax Client item!");
+            return;
+        }
+        shopList[minmax.getBestShopID()].sellProduct(minmax.getBestItemID(),minmax); // Czy dodajemy wiele produktów do jednego klienta;
     }
 
 

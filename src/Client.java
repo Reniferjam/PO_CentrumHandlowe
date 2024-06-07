@@ -1,7 +1,7 @@
 public class Client implements IClient
 {
     private int currentShopID, currentProductID;
-    public Item item;
+    public Item item; // do poprawienia
 
     public Client(Item item)
     {
@@ -61,17 +61,16 @@ public class Client implements IClient
         return currentShopID;
     }
 
-    public Item getItem () {
+    public Item getItem ()
+    {
             return item;
         }
 
-    public void setCurrentShopID ( int currentShopID){
+    public void setCurrentShopID ( int currentShopID)
+    {
             this.currentShopID = currentShopID;
-        }
-
-    public int decreaseQuantity(Item[] ItemList){
-        return 0;
     }
+
 
 
 }
