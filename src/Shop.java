@@ -25,35 +25,57 @@ public class Shop implements IShop
         this.numberOfProducts = numberOfProducts;
     }
 
-
-    public void sellProduct(int n,Client client) // do poprawienia
+    Shop()
     {
-        System.out.println("Shop: sellProduct");
-        System.out.println();
+        this.shopIncome = -1;
+        this.shopTax = -1;
+        this.shopProfit = -1;
+        this.itemList = new Item[1];
+        this.shopCapacity = -1;
+        this.currentCapacity = -1;
+        this.itemID = -1;
+        this.numberOfProducts = -1;
+    }
 
 
-        System.out.println("Sold " + client.getItem().getItemQuantity() + " " + client.getItem().getItemName());
-        System.out.println();
+    public void sellProduct(int itemID,Client client,int ShopID) // do poprawienia
+    {
+//        System.out.println("Shop: sellProduct");
+//        System.out.println();
 
-        shopIncome+=  ( itemList[n].getItemPrice() ) *  client.getItem().getItemQuantity();
-        itemList[n].setItemQuantity(itemList[n].getItemQuantity() - client.getItem().getItemQuantity());
-        client.item.setItemQuantity(0);
-        currentCapacity++;
-        shopProfit=shopIncome * (100 - shopTax) / 100;
-        printShop();
+        for (int n = 0; n < itemList.length; n++)
+        {
+            if(itemList[n].getItemID() == itemID)
+            {
+                System.out.println("Sold " + client.getItem().getItemQuantity() + " " + itemList[n].getItemName() + " at " + (ShopID+1) + " shop");
+                System.out.println();
+
+                shopIncome+=  ( itemList[n].getItemPrice() ) *  client.getItem().getItemQuantity();
+                itemList[n].setItemQuantity(itemList[n].getItemQuantity() - client.getItem().getItemQuantity());
+                client.item.setItemQuantity(0);
+                currentCapacity++;
+                shopProfit=shopIncome * (100 - shopTax) / 100;
+                return;
+            }
+        }
     }
 
     public void printShop()
     {
         System.out.println("Tax: " + shopTax);
-        System.out.printf("Profit: %.2f" ,shopIncome); // do poprawy
+        System.out.printf("Profit: %.2f" ,shopProfit); // do poprawy
         System.out.println();
-        System.out.printf("Income: %.2f" ,shopProfit); // do poprawy
+        System.out.printf("Income: %.2f" ,shopIncome); // do poprawy
         System.out.println();
         System.out.println("Capacity: " +currentCapacity);
         System.out.println("MaxCapacity:" +shopCapacity);
+        for (int i = 0; i < itemList.length; i++)
+        {
+            System.out.println();
+         Item.printItem(itemList[i]);
+            System.out.println();
+        }
         System.out.println();
-
     }
 
     public int getShopCapacity()
@@ -125,5 +147,4 @@ public class Shop implements IShop
 
         return new Shop(40,list,10,2);
     }
-
 }

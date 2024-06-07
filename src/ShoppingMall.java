@@ -9,10 +9,12 @@ public class ShoppingMall implements IShoppingMall
     private int minQuality, maxQuality;
     private double minPrice, maxPrice;
 
-    public static int numberOfShops;
+    private static int numberOfShopsStatic;
+    private int numberOfShops;
+
 
     public Shop[] shopList;
-    public ShoppingMall(int numberOfShops, int chanceOfRandomClient, int minQuality, int maxQuality, int minPrice, int maxPrice)
+    public ShoppingMall( int chanceOfRandomClient, int minQuality, int maxQuality, int minPrice, int maxPrice)
     {
         this.chanceOfRandomClient = chanceOfRandomClient;
         this.minPrice = minPrice;
@@ -21,8 +23,9 @@ public class ShoppingMall implements IShoppingMall
         this.maxQuality = maxQuality;
         this.numberOfClients = 0;
         this.numberOfRounds = 0;
-        this.numberOfShops = numberOfShops;
-        this.shopList = new Shop[numberOfShops];
+        this.numberOfShops = 0;
+        this.numberOfShopsStatic = numberOfShops;
+        this.shopList = new Shop[1];
     }
 
     public int getNumberOfClients()
@@ -51,29 +54,30 @@ public class ShoppingMall implements IShoppingMall
             shopList[i].setShopCapacity(0);
         }
     }
+
     public void initShops(Shop shop)
     {
-        System.out.println("Shopping Mall: initShops");
-        System.out.println();
+//        System.out.println("Shopping Mall: initShops");
+//        System.out.println();
 
-        for (int i = 0; i < getNumberOfShops(); i++) {
-            addShop(shop, i);
+        while (numberOfShops >= shopList.length)
+        {
+            increaseShopArraySize();
         }
+        shopList[numberOfShops++] = shop;
     }
 
-    public void addShop(Shop shop, int currentShop)
+    private void increaseShopArraySize()
     {
-        System.out.println("Shopping Mall: addShop");
-        System.out.println();
-        //shopList[currentShop] = new Shop(shop);    //jakosc dodac sklep do shoplisty
+            Shop[] newShops = new Shop[shopList.length*2];
+            System.arraycopy(shopList, 0, newShops, 0, shopList.length);
+            shopList = newShops;
     }
 
     public void nextRound()
     {
-        System.out.println("Shopping Mall: nextRound");
-        System.out.println();
 
-        for (int i = 0; i < getNumberOfClients(); i++)
+        for (int i = 0; i <(int)(Math.random()*(20)); i++)
         {
             int x = (int)(Math.random() * (101)); // losuje liczbe od 0 do 100
             if (x < chanceOfRandomClient)
@@ -83,16 +87,35 @@ public class ShoppingMall implements IShoppingMall
             {
                 roundForMinMax();
             }
-
-
-            //sprawdzamy czy checkproduct daje prawde jesli tak to buyproduct
         }
+
+        //System.out.println("ShopList length: " + shopList.length);
+//        for (int i = 0; i < shopList.length-1; i++)
+//        {
+//            System.out.println("Shop " + i);
+//            shopList[i].printShop();
+//        }
+        System.out.println();
+        printShops(shopList,numberOfRounds);
         numberOfRounds++;
+    }
+
+    public static void printShops(Shop[] shopList, int numberOfRounds)
+    {
+        System.out.printf("Tura  %2d |  income  |  profit  | prof/cli | currentCap | capacity |" ,numberOfRounds+1);
+        System.out.println("\n-------------------------------------------------------------------");
+        for (int i = 0; i < shopList.length-1; i++)
+        {
+            System.out.printf("Sklep %2d | %8.2f | %8.2f | %8.2f | %10d | %8d |", i+1, shopList[i].getShopIncome(), shopList[i].getShopProfit(), shopList[i].getShopProfit(), shopList[i].getCurrentCapacity(), shopList[i].getShopCapacity());
+            System.out.println();
+        }
+        System.out.println();
+//        System.out.printf("%8d %8d %8d %8d %d");
     }
 
     public void roundForRandom()
     {
-        Random rand = new Random(randomizeVariables(maxQuality, minQuality, maxPrice, minPrice),numberOfShops);
+        Random rand = new Random(randomizeVariables(), numberOfShops);
 
         //znalezione id sklepu
 
@@ -100,102 +123,50 @@ public class ShoppingMall implements IShoppingMall
         {
             if (rand.checkProduct(shopList[0].getItem(i)))
             {
-                shopList[0].sellProduct(i,rand);
+                shopList[0].sellProduct(i,rand,1);
             }
         }
     }
 
+//    public String collectData()
+//    {
+//        StringBuilder data = new StringBuilder();
+//        for (Shop shop : shops) {
+//            if (shop != null) {
+//                data.append(shop.getCustomers())
+//                        .append(",")
+//                        .append(shop.getSales())
+//                        .append("\n");
+//            }
+//        }
+//        return data.toString();
+//    }
+
     public void roundForMinMax()
     {
-        MinMax minmax = new MinMax(randomizeVariables(maxQuality, minQuality, maxPrice, minPrice));
+        MinMax minmax = new MinMax(randomizeVariables());
+        //Item.printItem(minmax.getItem());
         minmax.setBestShopID(shopList);
         if(minmax.getBestShopID() == -1)
         {
-            System.out.println("There is no shop that have MinMax Client item!");
+//            System.out.println();
+//            System.out.println("There is no shop that have MinMax Client item!");
+//            System.out.println();
             return;
         }
-        shopList[minmax.getBestShopID()].sellProduct(minmax.getBestItemID(),minmax); // Czy dodajemy wiele produktów do jednego klienta;
+        shopList[minmax.getBestShopID()].sellProduct(minmax.getItem().getItemID(),minmax,minmax.getBestShopID()); // Czy dodajemy wiele produktów do jednego klienta;
+        System.out.println();
     }
 
-
-    public Item randomizeVariables(int maxQuality, int minQuality, double minPrice, double maxPrice)
+    public Item randomizeVariables()
     {
         int quality = (int)(Math.random() * (maxQuality - minQuality + 1) + minQuality);
 
         double price = (double)(Math.random() * (maxPrice - minPrice + 1) + minPrice);
 
-        int id = (int)(Math.random() * (0/*wpisac ilosc przedmiotow + 1*/));
+        int id = (int)(Math.random() * (2/*wpisac ilosc przedmiotow + 1*/));
 
         return new Item("xD", id, 1, quality, price);
     }
 
-//    public void nextExampleRound()
-//    {
-//        Client client1 = Client.createExampleClient1();
-//        Client client2 = Client.createExampleClient2();
-//        for (int i = 0; i < shopList[0].getNumberOfProducts(); i++)
-//        {  // Client 1 i Shop A
-//            if (client1.checkProduct(shopList[0].getItem(i), shopList[0].getNumberOfProducts()))
-//            {
-//                System.out.println("Shop A");
-//                shopList[0].sellProduct(i,client1);
-//            }
-//        }
-//
-//        for (int i = 0; i < shopList[1].getNumberOfProducts(); i++)
-//        { // Client 1 i Shop ^(1 + B2)^
-//            if (client1.checkProduct(shopList[1].getItem(i), shopList[1].getNumberOfProducts()))
-//            {
-//                System.out.println("Shop B");
-//                shopList[1].sellProduct(i,client1);
-//            }
-//        }
-//
-//        for (int i = 0; i < shopList[0].getNumberOfProducts(); i++)
-//        { // Client 2 i Shop A
-//            if (client2.checkProduct(shopList[0].getItem(i), shopList[0].getNumberOfProducts()))
-//            {
-//                System.out.println("Shop A");
-//                shopList[0].sellProduct(i,client2);
-//            }
-//        }
-//
-//
-//        for (int i = 0; i < shopList[1].getNumberOfProducts(); i++)
-//        { // Client 2 i Shop B (should work)
-//            if (client2.checkProduct(shopList[1].getItem(i), shopList[1].getNumberOfProducts()))
-//            {
-//                System.out.println("Shop B");
-//                shopList[1].sellProduct(i,client2);
-//            }
-//        }
-//
-//        System.out.println();
-//        System.out.println("Client1 Item");
-//        Item.printItem(client1.getItem());
-//
-//        System.out.println();
-//
-//        System.out.println("Client2 Item");
-//        Item.printItem(client2.getItem());
-//
-//        System.out.println();
-//        System.out.println("ShopA");
-//        shopList[0].printShop();
-//        System.out.println();
-//        for (int i = 0; i < shopList[0].getNumberOfProducts(); i++) {
-//            System.out.println("ShopA Product: " +i);
-//            Item.printItem(shopList[0].getItem(i));
-//            System.out.println();
-//        }
-//
-//        System.out.println("ShopB");
-//        shopList[1].printShop();
-//        System.out.println();
-//        for (int i = 0; i < shopList[1].getNumberOfProducts(); i++) {
-//            System.out.println("ShopB Product: " +i);
-//            Item.printItem(shopList[1].getItem(i));
-//            System.out.println();
-//        }
-//    }
 }

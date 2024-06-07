@@ -6,6 +6,7 @@ public class Item
     private String itemName;
     private int itemID, itemQuantity, itemQuality;
     private double itemPrice;
+    public static int numberOfItems = 0;
 
     Item(String itemName, int itemID, int itemQuantity, int itemQuality, double itemPrice) // konstruktor Itemu
     {
@@ -61,12 +62,11 @@ public class Item
         System.out.println("ID:  " + item.itemID);
         System.out.println("Quantity:  " + item.itemQuantity);
         System.out.println("Quality:  " + item.itemQuality);
-        System.out.println("Price:  " + item.itemPrice);
-
+        System.out.printf("Price: %.2f" ,item.itemPrice);
     }
     public static Item createExampleItemA1()
     {
-        System.out.println("Item: createExampleItemA1");
+        //System.out.println("Item: createExampleItemA1");
         System.out.println();
 
         String name = "Buty";
@@ -79,8 +79,8 @@ public class Item
 
     public static Item createExampleItemA2()
     {
-        System.out.println("Item: createExampleItemA2");
-        System.out.println();
+        //System.out.println("Item: createExampleItemA2");
+        //System.out.println();
 
         String name = "Spodnie";
         int ID = 2;
@@ -92,8 +92,8 @@ public class Item
 
     public static Item createExampleItemB1()
     {
-        System.out.println("Item: createExampleItemB1");
-        System.out.println();
+        //System.out.println("Item: createExampleItemB1");
+        //System.out.println();
 
         String name = "Buty";
         int ID = 1;
@@ -105,39 +105,14 @@ public class Item
 
     public static Item createExampleItemB2()
     {
-        System.out.println("Item: createExampleItemB2");
-        System.out.println();
+        //System.out.println("Item: createExampleItemB2");
+        //System.out.println();
 
         String name = "Spodnie";
         int ID = 2;
         int quantity = 5;
         int quality = 40;
         double price = 99.99;
-        return new Item(name, ID, quantity, quality, price);
-    }
-
-    public static Item createExampleItemClient1()
-    {
-        System.out.println("Item: createExampleItemClient1");
-        System.out.println();
-
-        String name = "Spodnie";
-        int ID = 2;
-        int quantity = 3;
-        int quality = 30;
-        double price = 120;
-        return new Item(name, ID, quantity, quality, price);
-    }
-    public static Item createExampleItemClient2()
-    {
-        System.out.println("Item: createExampleItemClient2");
-        System.out.println();
-
-        String name = "Buty";
-        int ID = 1;
-        int quantity = 2;
-        int quality = 65;
-        double price = 500;
         return new Item(name, ID, quantity, quality, price);
     }
 }

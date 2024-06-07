@@ -16,7 +16,7 @@ public class MinMax extends Client
 
     private void findBestShop(Shop[] shop)
     {
-        for (int j = 0; j < shop.length; j++) // pętla dla każdego sklepu
+        for (int j = 0; j < 3; j++) // pętla dla każdego sklepu
         {
             for (int i = 0; i < shop[j].itemList.length; i++) // pętla dla każdego przedmiotu
             {
@@ -60,7 +60,6 @@ public class MinMax extends Client
                 }
             }
         }
-
     }
 
     public void setBestShopID(Shop[] shop)

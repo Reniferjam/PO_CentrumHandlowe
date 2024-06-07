@@ -25,8 +25,8 @@ public class Client implements IClient
 
     public boolean checkProduct(Item ShopItem)
     {
-        System.out.println("Client: checkProduct");
-        System.out.println();
+//        System.out.println("Client: checkProduct");
+//        System.out.println();
 
         if (ShopItem.getItemQuantity() < 0)
         {
@@ -70,7 +70,4 @@ public class Client implements IClient
     {
             this.currentShopID = currentShopID;
     }
-
-
-
 }
