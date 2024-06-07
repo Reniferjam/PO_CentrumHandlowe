@@ -29,14 +29,12 @@ public class Menu
         System.out.println("Czy chcesz kontynuować symulacje? 1 to tak");
         System.out.println();
         Scanner scan = new Scanner(System.in);
-        do
+        while (scan.nextInt() == 1)
         {
-            System.out.println("Czy chcesz kontynuować symulacje? 1 to tak");
             System.out.println();
             shoppingMall.nextRound();
-
-        } while (scan.nextInt() == 1);
-
+            System.out.println("Czy chcesz kontynuować symulacje? 1 to tak");
+        }
     }
 
     public void customizeClients()

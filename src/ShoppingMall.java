@@ -9,7 +9,7 @@ public class ShoppingMall implements IShoppingMall
     private int minQuality = 20, maxQuality = 80;
     private double minPrice = 100, maxPrice = 300;
 
-    public int numberOfShops;
+    public static int numberOfShops;
 
     public Shop[] shopList;
     public ShoppingMall(int numberOfShops)
@@ -66,22 +66,12 @@ public class ShoppingMall implements IShoppingMall
 //        }
 //    }
 
-    private MinMax generateMinMax()
-    {
-        return new MinMax(randomizeVariables(maxQuality, minQuality, maxPrice, minPrice));
-    }
-
-    private Random generateRandom()
-    {
-        return new Random(randomizeVariables(maxQuality, minQuality, maxPrice, minPrice));
-    }
-
     public void initShops(Shop shop)
     {
         System.out.println("Shopping Mall: initShops");
         System.out.println();
 
-        for (int i = 0; i < numberOfShops; i++) {
+        for (int i = 0; i < getNumberOfShops(); i++) {
             addShop(shop, i);
         }
     }
@@ -98,29 +88,13 @@ public class ShoppingMall implements IShoppingMall
         System.out.println("Shopping Mall: nextRound");
         System.out.println();
 
-        for (int i = 0; i < numberOfClients; i++)
+        for (int i = 0; i < getNumberOfClients(); i++)
         {
             int x = (int)(Math.random() * (101));
             if (x < chanceOfRandomClient)
             {
-                generateRandom(); //returnuje randoma
-                Random rand = new Random(randomizeVariables(maxQuality, minQuality, maxPrice, minPrice));
-
-
-//
-//                for (int i = 0; i < shopList[0].getNumberOfProducts(); i++)
-//                {  // Client 1 i Shop A
-//                    if (rand.checkProduct(shopList[0].getItem(i)))
-//                    {
-//                        System.out.println("Shop A");
-//                        shopList[0].sellProduct(i,rand);
-//                    }
-//                }
-
-
-
+                roundForRandom();
             } else {
-                generateMinMax(); //returnuje minmaxa
                 MinMax minmax = new MinMax(randomizeVariables(maxQuality, minQuality, maxPrice, minPrice));
             }
 
@@ -129,6 +103,22 @@ public class ShoppingMall implements IShoppingMall
         }
         numberOfRounds++;
     }
+
+    public void roundForRandom()
+    {
+        Random rand = new Random(randomizeVariables(maxQuality, minQuality, maxPrice, minPrice));
+
+        //znalezione id sklepu
+
+        for (int i = 0; i < shopList[rand.getRandomShopID()].getNumberOfProducts(); i++)
+        {
+            if (rand.checkProduct(shopList[0].getItem(i)))
+            {
+                shopList[0].sellProduct(i,rand);
+            }
+        }
+    }
+
 
     public Item randomizeVariables(int maxQuality, int minQuality, double minPrice, double maxPrice)
     {

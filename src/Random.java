@@ -1,17 +1,20 @@
 public class Random extends Client
 {
     public boolean[] RandomShopList;
-
+    private int randomShopID;
 
     public Random(Item item)
     {
         super(item);
     }
 
-    //funkcja losujaca numer sklepu
-
-    public int randomShop()
+    public void randomShop()
     {
-        return (int)(Math.random()*1); //1 - zamienic na liczbe sklepow
+        randomShopID = (int)(Math.random()*1); //1 - zamienic na liczbe sklepow
+    }
+
+    public int getRandomShopID()
+    {
+        return randomShopID;
     }
 }
