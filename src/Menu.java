@@ -1,5 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Menu
 {
@@ -80,13 +82,10 @@ public class Menu
         shoppingMall.initShops(new Shop(20,listC,20,2));
     }
 
-//    private void writeDataToCSV(String filename, String data)
+//    public void writeToCSV()
 //    {
-//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
-//            writer.write(data);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+//        FileWriter csv = new FileWriter("simulation_data");
+//
 //    }
 
     public static void main(String[] args)

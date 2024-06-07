@@ -69,7 +69,7 @@ public class Item
         //System.out.println("Item: createExampleItemA1");
         System.out.println();
 
-        String name = "Buty";
+        String name = "Shoes";
         int ID = 1;
         int quantity = 5;
         int quality = 70;
@@ -82,7 +82,7 @@ public class Item
         //System.out.println("Item: createExampleItemA2");
         //System.out.println();
 
-        String name = "Spodnie";
+        String name = "Trousers";
         int ID = 2;
         int quantity = 10;
         int quality = 65;
@@ -95,7 +95,7 @@ public class Item
         //System.out.println("Item: createExampleItemB1");
         //System.out.println();
 
-        String name = "Buty";
+        String name = "Shoes";
         int ID = 1;
         int quantity = 3;
         int quality = 40;
@@ -108,7 +108,7 @@ public class Item
         //System.out.println("Item: createExampleItemB2");
         //System.out.println();
 
-        String name = "Spodnie";
+        String name = "Trousers";
         int ID = 2;
         int quantity = 5;
         int quality = 40;

@@ -102,11 +102,11 @@ public class ShoppingMall implements IShoppingMall
 
     public static void printShops(Shop[] shopList, int numberOfRounds)
     {
-        System.out.printf("Tura  %2d |  income  |  profit  | prof/cli | currentCap | capacity |" ,numberOfRounds+1);
+        System.out.printf("Round %2d |  income  |  profit  | prof/cli | currentCap | capacity |" ,numberOfRounds+1);
         System.out.println("\n-------------------------------------------------------------------");
         for (int i = 0; i < shopList.length-1; i++)
         {
-            System.out.printf("Sklep %2d | %8.2f | %8.2f | %8.2f | %10d | %8d |", i+1, shopList[i].getShopIncome(), shopList[i].getShopProfit(), shopList[i].getShopProfit(), shopList[i].getCurrentCapacity(), shopList[i].getShopCapacity());
+            System.out.printf("Shop  %2d | %8.2f | %8.2f | %8.2f | %10d | %8d |", i+1, shopList[i].getShopIncome(), shopList[i].getShopProfit(), shopList[i].getShopProfit(), shopList[i].getCurrentCapacity(), shopList[i].getShopCapacity());
             System.out.println();
         }
         System.out.println();
