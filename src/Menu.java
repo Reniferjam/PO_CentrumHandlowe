@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.FileWriter;
@@ -46,21 +47,21 @@ public class Menu
     }
     public void createShops()
     {
-        Item[] listA = new Item[2];
-        listA[0] = Item.createExampleItemA1();
-        listA[1] = Item.createExampleItemA2();
+        ArrayList<Item> listA = new ArrayList<Item>();
+        listA.add(Item.createExampleItemA1());
+        listA.add(Item.createExampleItemA2());
         NumberOfShops++;
         shoppingMall.initShops(new Shop(40,listA,10,2)); //inicjalizacja sklepow + dodawanie przedmiotow do sklepow
 
-        Item[] listB = new Item[2];
-        listB[0] = Item.createExampleItemB1();
-        listB[1] = Item.createExampleItemB2();
+        ArrayList<Item> listB = new ArrayList<Item>();
+        listA.add(Item.createExampleItemB1());
+        listA.add(Item.createExampleItemB2());
         NumberOfShops++;
         shoppingMall.initShops(new Shop(10,listB,30,2)); //inicjalizacja sklepow + dodawanie przedmiotow do sklepow
 
-        Item[] listC = new Item[2];
-        listC[0] = Item.createExampleItemA1();
-        listC[1] = Item.createExampleItemA2();
+        ArrayList<Item> listC = new ArrayList<Item>();
+        listA.add(Item.createExampleItemA1());
+        listA.add(Item.createExampleItemB2());
         NumberOfShops++;
         shoppingMall.initShops(new Shop(20,listC,20,2));
 

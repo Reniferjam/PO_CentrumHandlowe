@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Shop implements IShop
@@ -9,8 +10,8 @@ public class Shop implements IShop
     private int currentCapacity = 0;
     private int numberOfProducts;
     private double profitOnClient;
-    private Item[] itemList;
-    Shop(int shopTax, Item[] itemList, int shopCapacity, int numberOfProducts)
+    private ArrayList<Item> itemList = new ArrayList<Item>();
+    Shop(int shopTax, ArrayList<Item> itemList, int shopCapacity, int numberOfProducts)
     {
         this.shopIncome = 0;
         this.shopTax = shopTax;
@@ -26,7 +27,7 @@ public class Shop implements IShop
         this.shopIncome = -1;
         this.shopTax = -1;
         this.shopProfit = -1;
-        this.itemList = new Item[1];
+        this.itemList = new ArrayList<Item>();
         this.shopCapacity = -1;
         this.currentCapacity = -1;
         this.numberOfProducts = -1;
@@ -34,15 +35,15 @@ public class Shop implements IShop
     }
     public void sellProduct(int itemID,Client client,int ShopID) // do poprawienia
     {
-        for (int n = 0; n < itemList.length; n++)
+        for (int n = 0; n < itemList.size(); n++)
         {
-            if(itemList[n].getItemID() == itemID)
+            if(itemList.get(n).getItemID() == itemID)
             {
-                System.out.println("Sold " + client.getItem().getItemQuantity() + " " + itemList[n].getItemName() + " at " + (ShopID+1) + " shop");
+                System.out.println("Sold " + client.getItem().getItemQuantity() + " " + itemList.get(n).getItemName() + " at " + (ShopID+1) + " shop");
                 System.out.println();
 
-                shopIncome+=  ( itemList[n].getItemPrice() ) *  client.getItem().getItemQuantity();
-                itemList[n].setItemQuantity(itemList[n].getItemQuantity() - client.getItem().getItemQuantity());
+                shopIncome+=  ( itemList.get(n).getItemPrice() ) *  client.getItem().getItemQuantity();
+                itemList.get(n).setItemQuantity(itemList.get(n).getItemQuantity() - client.getItem().getItemQuantity());
                 client.getItem().setItemQuantity(0);
                 currentCapacity++;
                 shopProfit=shopIncome * (100 - shopTax) / 100;
@@ -73,12 +74,12 @@ public class Shop implements IShop
     {
         return currentCapacity;
     }
-    public Item[] getItemList() {
+    public ArrayList<Item> getItemList() {
         return itemList;
     }
     public Item getItem(int n)
     {
-        return itemList[n];
+        return itemList.get(n);
     }
     public int getNumberOfProducts() {
         return numberOfProducts;
