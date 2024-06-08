@@ -7,7 +7,6 @@ public class Item
     private int itemID, itemQuantity, itemQuality;
     private double itemPrice;
     public static int numberOfItems = 0;
-
     Item(String itemName, int itemID, int itemQuantity, int itemQuality, double itemPrice) // konstruktor Itemu
     {
         this.itemName = itemName;
@@ -55,7 +54,6 @@ public class Item
     {
         this.itemQuantity = itemQuantity;
     }
-
     public static void printItem(Item item)
     {
         System.out.println("Name:  " + item.itemName);

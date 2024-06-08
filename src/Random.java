@@ -5,7 +5,7 @@ public class Random extends Client
 
     private int visitedShops;
 
-    public Random(Item item,int numberOfShops)
+    Random(Item item, int numberOfShops)
     {
         super(item);
         this.RandomShopList = new boolean[numberOfShops];

@@ -7,36 +7,17 @@ public class Menu
 {
     private int NumberOfShops;
     private ShoppingMall shoppingMall;
-
-
-    private Menu()
+    Menu()
     {
-        this.NumberOfShops = 3;
-        this.shoppingMall = new ShoppingMall(30,20,80,100,300);
+        this.NumberOfShops = 0;
+        this.shoppingMall = new ShoppingMall(20,30,20,80,100,300);
     }
-
-
     public  void startSimulation()
     {
-        //System.out.println("Menu: startSimulation");
-        //System.out.println();
-
         createShops();
         //writeDataToCSV("data_simulation.csv", "1," + shoppingMall.collectData());
-        /////////////////////////
         shoppingMall.nextRound();
-        /////////////////////////
-        System.out.println();
         Scanner scan = new Scanner(System.in);
-//        while (scan.nextInt() == 1)
-//        {
-//            System.out.println();
-//            /////////////////////////
-//            shoppingMall.nextRound();
-//            /////////////////////////
-//            System.out.println("Do you want to continue? [press 1 to continue, press 2 to end simulation]");
-//        }
-//        scan.close();
         while (true)
         {
             try {
@@ -63,31 +44,32 @@ public class Menu
             }
         }
     }
-
     public void createShops()
     {
         Item[] listA = new Item[2];
         listA[0] = Item.createExampleItemA1();
         listA[1] = Item.createExampleItemA2();
+        NumberOfShops++;
         shoppingMall.initShops(new Shop(40,listA,10,2)); //inicjalizacja sklepow + dodawanie przedmiotow do sklepow
 
         Item[] listB = new Item[2];
         listB[0] = Item.createExampleItemB1();
         listB[1] = Item.createExampleItemB2();
+        NumberOfShops++;
         shoppingMall.initShops(new Shop(10,listB,30,2)); //inicjalizacja sklepow + dodawanie przedmiotow do sklepow
 
         Item[] listC = new Item[2];
         listC[0] = Item.createExampleItemA1();
         listC[1] = Item.createExampleItemA2();
+        NumberOfShops++;
         shoppingMall.initShops(new Shop(20,listC,20,2));
-    }
 
+    }
 //    public void writeToCSV()
 //    {
 //        FileWriter csv = new FileWriter("simulation_data");
 //
 //    }
-
     public static void main(String[] args)
     {
         Menu menu = new Menu();
