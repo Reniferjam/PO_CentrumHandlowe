@@ -66,11 +66,6 @@ public class Menu
         list.add(new Item("Hat",3,100,30,100));
         shoppingMall.shopList.add(new Shop(20,list,20)); //inicjalizacja sklepow + dodawanie przedmiotow do sklepow
     }
-//    public void writeToCSV()
-//    {
-//        FileWriter csv = new FileWriter("simulation_data");
-//
-//    }
     public static void main(String[] args)
     {
         Menu menu = new Menu();

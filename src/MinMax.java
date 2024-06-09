@@ -66,8 +66,4 @@ public class MinMax extends Client implements IClient
     {
         return bestShopID;
     }
-    public int getBestItemID()
-    {
-        return bestItemID;
-    }
 }

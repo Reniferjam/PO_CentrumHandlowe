@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Shop implements IShop
+public class Shop
 {
     private int shopCapacity;
     private double shopIncome;

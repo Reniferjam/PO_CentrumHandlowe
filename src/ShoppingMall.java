@@ -1,10 +1,10 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
-public class ShoppingMall implements IShoppingMall
-{
+public class ShoppingMall {
     private  int maxClients, numberOfRounds;
     private int chanceOfRandomClient;
     private int minQuality, maxQuality;
@@ -93,9 +93,10 @@ public class ShoppingMall implements IShoppingMall
             {
                 FileWriter fw = new FileWriter("Wyniki.csv");
                 fw.write("Round" + (numberOfRounds+1) + ";income;profit;prof/cli;capacity");
+                final DecimalFormat decfor = new DecimalFormat("0.00");
                 for (int i = 0; i < shopList.size(); i++)
                 {
-                    fw.write("\nShop" +(i+1) + ";" + shopList.get(i).getShopIncome() +";" + shopList.get(i).getShopProfit() +";" + shopList.get(i).getProfitOnClient() + ";" + shopList.get(i).getShopCapacity());
+                    fw.write("\nShop" +(i+1) + ";" + decfor.format(shopList.get(i).getShopIncome()) +";" + decfor.format(shopList.get(i).getShopProfit()) +";" + decfor.format(shopList.get(i).getProfitOnClient()) + ";" + shopList.get(i).getShopCapacity());
                     System.out.println();
                 }
                 System.out.println();
