@@ -9,6 +9,7 @@ public class Shop implements IShop
     private double shopProfit;
     private int currentCapacity = 0;
     private double profitOnClient; // wartość średniego zarobku na jednego klienta
+    private int soldProducts=0;
     private ArrayList<Item> itemList = new ArrayList<Item>(); // ArrayLista itemów
     Shop(int shopTax, ArrayList<Item> itemList, int shopCapacity) // konstruktor sklepu
     {
@@ -44,6 +45,7 @@ public class Shop implements IShop
                 client.getItem().setItemQuantity(0);
                 currentCapacity++;
                 shopProfit=shopIncome * (100 - shopTax) / 100;
+                soldProducts++;
                 return;
             }
         }
@@ -80,13 +82,19 @@ public class Shop implements IShop
     public void setProfitOnClient(double profitOnClient) {
         this.profitOnClient = profitOnClient;
     }
+
+    public int getSoldProducts() {
+        return soldProducts;
+    }
+
     public static void printShops(ArrayList<Shop> shopList, int numberOfRounds)
     {
         System.out.printf("Round %2d |  income  |  profit  | prof/cli | currentCap | capacity |" ,numberOfRounds+1);
         System.out.println("\n-------------------------------------------------------------------");
         for (int i = 0; i < shopList.size(); i++)
         {
-            System.out.printf("Shop  %2d | %8.2f | %8.2f | %8.2f | %10d | %8d |", i+1, shopList.get(i).getShopIncome(), shopList.get(i).getShopProfit(), shopList.get(i).getShopProfit(), shopList.get(i).getCurrentCapacity(), shopList.get(i).getShopCapacity());
+            shopList.get(i).setProfitOnClient(shopList.get(i).getShopProfit()/shopList.get(i).getSoldProducts());
+            System.out.printf("Shop  %2d | %8.2f | %8.2f | %8.2f | %10d | %8d |", i+1, shopList.get(i).getShopIncome(), shopList.get(i).getShopProfit(), shopList.get(i).getProfitOnClient(), shopList.get(i).getCurrentCapacity(), shopList.get(i).getShopCapacity());
             System.out.println();
         }
         System.out.println();

@@ -1,37 +1,40 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class ShoppingMall implements IShoppingMall
 {
-    private  int numberOfClients, numberOfRounds;
+    private  int maxClients, numberOfRounds;
     private int chanceOfRandomClient;
     private int minQuality, maxQuality;
     private double minPrice, maxPrice;
     public ArrayList<Shop> shopList;
-    public ShoppingMall(int numberOfClients, int chanceOfRandomClient, int minQuality, int maxQuality, int minPrice, int maxPrice)
+
+    private int itemCount;
+    public ShoppingMall(int maxClients, int chanceOfRandomClient, int minQuality, int maxQuality, double minPrice, double maxPrice, int itemCount)
     {
         this.chanceOfRandomClient = chanceOfRandomClient;
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
         this.minQuality = minQuality;
         this.maxQuality = maxQuality;
-        this.numberOfClients = numberOfClients;
+        this.maxClients = maxClients;
         this.numberOfRounds = 0;
         this.shopList = new ArrayList<Shop>();
+        this.itemCount = itemCount;
     }
     public void nextRound()
     {
         resetCapacity();
-        for (int i = 0; i <(int)(Math.random()*(numberOfClients)); i++)
+        for (int i = 0; i <maxClients; i++)
         {
             int x = (int)(Math.random() * (101)); // losuje liczbe od 0 do 100
             if (x < chanceOfRandomClient)
             {
-                Random client = new Random(randomizeVariables(), shopList.size());
                 roundForRandom();
             } else
             {
-
-                MinMax client = new MinMax(randomizeVariables());
                 roundForMinMax();
             }
 
@@ -42,11 +45,17 @@ public class ShoppingMall implements IShoppingMall
     public void roundForRandom()
     {
         Random rand = new Random(randomizeVariables(), shopList.size());
-        for (int i = 0; i <  5 /*shopList.get(rand.getRandomShopID()).getNumberOfProducts()*/; i++)
+        rand.findShop(shopList);
+        int x = rand.getRandomShopID();
+        for (int i = 0; i < shopList.get(x).getItemList().size(); i++)
         {
             if (rand.checkProduct(shopList.get(0).getItem(i)))
             {
-                shopList.get(0).sellProduct(i,rand,1);
+                if(shopList.get(x).getCurrentCapacity() >= shopList.get(x).getShopCapacity())
+                {
+                    continue;
+                }
+                shopList.get(0).sellProduct(i,rand,x);
             }
         }
     }
@@ -58,7 +67,12 @@ public class ShoppingMall implements IShoppingMall
         {
             return;
         }
-        shopList.get(minmax.getBestShopID()).sellProduct(minmax.getItem().getItemID(),minmax,minmax.getBestShopID());
+        int x = minmax.getBestShopID();
+        if(shopList.get(x).getCurrentCapacity() >= shopList.get(x).getShopCapacity())
+        {
+            return;
+        }
+        shopList.get(x).sellProduct(minmax.getItem().getItemID(),minmax,minmax.getBestShopID());
     }
     private void resetCapacity()
     {
@@ -70,20 +84,29 @@ public class ShoppingMall implements IShoppingMall
     {
         int quality = (int)(Math.random() * (maxQuality - minQuality + 1) + minQuality);
         double price = (double)(Math.random() * (maxPrice - minPrice + 1) + minPrice);
-        int id = (int)(Math.random() * (2/*wpisac ilosc przedmiotow + 1*/));
-        return new Item("xD", id, 1, quality, price);
+        int id = (int)((Math.random() * (itemCount))+1);
+        return new Item(" ", id, 1, quality, price);
     }
-    //    public String collectData()
-    //    {
-    //        StringBuilder data = new StringBuilder();
-    //        for (Shop shop : shops) {
-    //            if (shop != null) {
-    //                data.append(shop.getCustomers())
-    //                        .append(",")
-    //                        .append(shop.getSales())
-    //                        .append("\n");
-    //            }
-    //        }
-    //        return data.toString();
-    //    }
+        public void collectData()
+        {
+            try
+            {
+                FileWriter fw = new FileWriter("Wyniki.csv");
+                fw.write("Round" + (numberOfRounds+1) + ";income;profit;prof/cli;capacity");
+                for (int i = 0; i < shopList.size(); i++)
+                {
+                    fw.write("\nShop" +(i+1) + ";" + shopList.get(i).getShopIncome() +";" + shopList.get(i).getShopProfit() +";" + shopList.get(i).getProfitOnClient() + ";" + shopList.get(i).getShopCapacity());
+                    System.out.println();
+                }
+                System.out.println();
+                fw.close();
+            }
+            catch (InputMismatchException e)
+            {
+                e.getStackTrace();
+            } catch (IOException e)
+            {
+                throw new RuntimeException(e);
+            }
+        }
 }

@@ -56,6 +56,5 @@ public class Client implements IClient
 
     public void findShop(ArrayList<Shop> shopList)
     {
-        System.out.println("Klient");
     }
 }
