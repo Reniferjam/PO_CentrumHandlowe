@@ -8,10 +8,9 @@ public class Shop implements IShop
     private int shopTax;
     private double shopProfit;
     private int currentCapacity = 0;
-    private int numberOfProducts;
-    private double profitOnClient;
-    private ArrayList<Item> itemList = new ArrayList<Item>();
-    Shop(int shopTax, ArrayList<Item> itemList, int shopCapacity, int numberOfProducts)
+    private double profitOnClient; // wartość średniego zarobku na jednego klienta
+    private ArrayList<Item> itemList = new ArrayList<Item>(); // ArrayLista itemów
+    Shop(int shopTax, ArrayList<Item> itemList, int shopCapacity) // konstruktor sklepu
     {
         this.shopIncome = 0;
         this.shopTax = shopTax;
@@ -19,10 +18,9 @@ public class Shop implements IShop
         this.itemList = itemList;
         this.shopCapacity = shopCapacity;
         this.currentCapacity = 0;
-        this.numberOfProducts = numberOfProducts;
         this.profitOnClient = 0;
     }
-    Shop()
+    Shop() // konstruktor domyślny sklepu
     {
         this.shopIncome = -1;
         this.shopTax = -1;
@@ -30,7 +28,6 @@ public class Shop implements IShop
         this.itemList = new ArrayList<Item>();
         this.shopCapacity = -1;
         this.currentCapacity = -1;
-        this.numberOfProducts = -1;
         this.profitOnClient = 0;
     }
     public void sellProduct(int itemID,Client client,int ShopID) // do poprawienia
@@ -62,10 +59,6 @@ public class Shop implements IShop
     public void setCurrentCapacity(int currentCapacity) {
         this.currentCapacity = currentCapacity;
     }
-    public double getShopTax()
-    {
-        return shopTax;
-    }
     public double getShopProfit()
     {
         return shopProfit;
@@ -81,28 +74,21 @@ public class Shop implements IShop
     {
         return itemList.get(n);
     }
-    public int getNumberOfProducts() {
-        return numberOfProducts;
-    }
     public double getProfitOnClient() {
         return profitOnClient;
     }
-
     public void setProfitOnClient(double profitOnClient) {
         this.profitOnClient = profitOnClient;
     }
-
-    public static void printShops(Shop[] shopList, int numberOfRounds)
+    public static void printShops(ArrayList<Shop> shopList, int numberOfRounds)
     {
         System.out.printf("Round %2d |  income  |  profit  | prof/cli | currentCap | capacity |" ,numberOfRounds+1);
         System.out.println("\n-------------------------------------------------------------------");
-        for (int i = 0; i < shopList.length; i++)
+        for (int i = 0; i < shopList.size(); i++)
         {
-            System.out.printf("Shop  %2d | %8.2f | %8.2f | %8.2f | %10d | %8d |", i+1, shopList[i].getShopIncome(), shopList[i].getShopProfit(), shopList[i].getShopProfit(), shopList[i].getCurrentCapacity(), shopList[i].getShopCapacity());
+            System.out.printf("Shop  %2d | %8.2f | %8.2f | %8.2f | %10d | %8d |", i+1, shopList.get(i).getShopIncome(), shopList.get(i).getShopProfit(), shopList.get(i).getShopProfit(), shopList.get(i).getCurrentCapacity(), shopList.get(i).getShopCapacity());
             System.out.println();
         }
         System.out.println();
-//        System.out.printf("%8d %8d %8d %8d %d");
     }
-
 }

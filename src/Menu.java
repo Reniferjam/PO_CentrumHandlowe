@@ -6,11 +6,9 @@ import java.io.IOException;
 
 public class Menu
 {
-    private int NumberOfShops;
     private ShoppingMall shoppingMall;
     Menu()
     {
-        this.NumberOfShops = 0;
         this.shoppingMall = new ShoppingMall(20,30,20,80,100,300);
     }
     public  void startSimulation()
@@ -47,24 +45,20 @@ public class Menu
     }
     public void createShops()
     {
-        ArrayList<Item> listA = new ArrayList<Item>();
-        listA.add(Item.createExampleItemA1());
-        listA.add(Item.createExampleItemA2());
-        NumberOfShops++;
-        shoppingMall.initShops(new Shop(40,listA,10,2)); //inicjalizacja sklepow + dodawanie przedmiotow do sklepow
+        ArrayList<Item> list = new ArrayList<Item>();
+        list.add(new Item("Shoes",1,5,70,499.99));
+        list.add(new Item("Trousers",2,10,65,175.99));
+        shoppingMall.shopList.add(new Shop(40,list,10)); //inicjalizacja sklepow + dodawanie przedmiotow do sklepow
 
-        ArrayList<Item> listB = new ArrayList<Item>();
-        listA.add(Item.createExampleItemB1());
-        listA.add(Item.createExampleItemB2());
-        NumberOfShops++;
-        shoppingMall.initShops(new Shop(10,listB,30,2)); //inicjalizacja sklepow + dodawanie przedmiotow do sklepow
+        list = new ArrayList<Item>();
+        list.add(new Item("Shoes",1,3,40,250.99));
+        list.add( new Item("Trousers",2,7,50,160.99));
+        shoppingMall.shopList.add(new Shop(10,list,30)); //inicjalizacja sklepow + dodawanie przedmiotow do sklepow
 
-        ArrayList<Item> listC = new ArrayList<Item>();
-        listA.add(Item.createExampleItemA1());
-        listA.add(Item.createExampleItemB2());
-        NumberOfShops++;
-        shoppingMall.initShops(new Shop(20,listC,20,2));
-
+        list = new ArrayList<Item>();
+        list.add(new Item("Gloves",4,20,50,120));
+        list.add(new Item("Hat",3,8,90,120));
+        shoppingMall.shopList.add(new Shop(20,list,20)); //inicjalizacja sklepow + dodawanie przedmiotow do sklepow
     }
 //    public void writeToCSV()
 //    {

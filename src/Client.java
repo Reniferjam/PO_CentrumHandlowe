@@ -1,12 +1,10 @@
+import java.util.ArrayList;
+
 public class Client implements IClient
 {
-    private int currentShopID, currentProductID;
-    private Item item; // do poprawienia
-
+    private Item item;
     Client(Item item)
     {
-        this.currentProductID = 0;
-        this.currentShopID = 0;
         this.item = item;
     }
     public void buyProduct()
@@ -22,6 +20,7 @@ public class Client implements IClient
     }
     public boolean checkProduct(Item ShopItem)
     {
+        // sprawdzenie warunków zakupu przedmiotu
         if (ShopItem.getItemQuantity() < 0)
         {
             return false;
@@ -44,20 +43,19 @@ public class Client implements IClient
 
         return true;
     }
-    public int getCurrentProductID ()
-        {
-            return currentProductID;
-        }
-    public int getCurrentShopID ()
-    {
-        return currentShopID;
-    }
+
     public Item getItem ()
     {
-            return item;
+        return item;
     }
-    public void setCurrentShopID ( int currentShopID)
+
+    public void buyProduct(Shop shop)
     {
-        this.currentShopID = currentShopID;
+
+    }
+
+    public void findShop(ArrayList<Shop> shopList)
+    {
+        System.out.println("Klient");
     }
 }

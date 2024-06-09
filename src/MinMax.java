@@ -1,9 +1,10 @@
-public class MinMax extends Client
+import java.util.ArrayList;
+
+public class MinMax extends Client implements IClient
 {
     private int bestShopID;
     private double bestShopPrice;
     private double bestShopQuality;
-
     private int bestItemID;
     MinMax(Item item)
     {
@@ -13,36 +14,36 @@ public class MinMax extends Client
         this.bestShopPrice = 0;
         this.bestItemID = -1;
     }
-
-    public void findBestShop(Shop[] shop)
+    public void findShop(ArrayList<Shop> shopList)
     {
-        for (int j = 0; j < 3; j++) // pętla dla każdego sklepu
+        for (int j = 0; j < shopList.size(); j++) // pętla dla każdego sklepu
         {
-            for (int i = 0; i < shop[j].getItemList().size(); i++) // pętla dla każdego przedmiotu
+            for (int i = 0; i < shopList.get(j).getItemList().size(); i++) // pętla dla każdego przedmiotu
             {
-                if(getItem().getItemID() != shop[j].getItemList().get(i).getItemID())
+                // sprawdzenie warunków kupienia przedmiotu
+                if(getItem().getItemID() != shopList.get(j).getItemList().get(i).getItemID())
                 {
                     continue;
                 }
 
-                if( getItem().getItemQuantity() >= shop[j].getItemList().get(i).getItemQuantity() )
+                if( getItem().getItemQuantity() >= shopList.get(j).getItemList().get(i).getItemQuantity() )
                 {
                     continue;
                 }
 
-                if( getItem().getItemPrice() > shop[j].getItemList().get(i).getItemPrice() )
+                if( getItem().getItemPrice() > shopList.get(j).getItemList().get(i).getItemPrice() )
                 {
                     continue;
                 }
 
-                if(getItem().getItemQuality() > shop[j].getItemList().get(i).getItemQuality())
+                if(getItem().getItemQuality() > shopList.get(j).getItemList().get(i).getItemQuality())
                 {
                     continue;
                 }
 
-                double tempPrice = shop[j].getItemList().get(i).getItemPrice();
-                double tempQuality = shop[j].getItemList().get(i).getItemQuality();
-
+                double tempPrice = shopList.get(j).getItemList().get(i).getItemPrice();
+                double tempQuality = shopList.get(j).getItemList().get(i).getItemQuality();
+                // nadpisanie przedmiotu jeśli znajdzie się lepszy
                 if (tempQuality > bestShopQuality)
                 {
                     bestShopQuality = tempQuality;
@@ -51,7 +52,7 @@ public class MinMax extends Client
                     bestItemID = i;
                 }
 
-                if (tempQuality == bestShopQuality && tempPrice < bestShopQuality)
+                if (tempQuality == bestShopQuality && tempPrice < bestShopPrice)
                 {
                     bestShopQuality = tempQuality;
                     bestShopPrice = tempPrice;
@@ -61,12 +62,10 @@ public class MinMax extends Client
             }
         }
     }
-
     public int getBestShopID()
     {
         return bestShopID;
     }
-
     public int getBestItemID()
     {
         return bestItemID;
