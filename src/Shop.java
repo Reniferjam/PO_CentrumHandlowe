@@ -98,5 +98,7 @@ public class Shop
             System.out.println();
         }
         System.out.println();
+
+        System.out.println(shopList.get(0).getCurrentCapacity());
     }
 }

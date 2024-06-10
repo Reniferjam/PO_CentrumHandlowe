@@ -49,13 +49,17 @@ public class ShoppingMall {
         int x = rand.getRandomShopID();
         for (int i = 0; i < shopList.get(x).getItemList().size(); i++)
         {
-            if (rand.checkProduct(shopList.get(0).getItem(i)))
+            if (rand.checkProduct(shopList.get(x).getItem(i)))
             {
                 if(shopList.get(x).getCurrentCapacity() >= shopList.get(x).getShopCapacity())
                 {
-                    continue;
+                    return;
                 }
-                shopList.get(0).sellProduct(i,rand,x);
+                else
+                {
+                    shopList.get(x).sellProduct(i,rand,x);
+                    return;
+                }
             }
         }
     }
@@ -63,16 +67,19 @@ public class ShoppingMall {
     {
         MinMax minmax = new MinMax(randomizeVariables());
         minmax.findShop(shopList);
-        if(minmax.getBestShopID() == -1)
+        int x = minmax.getBestShopID();
+        if(x == -1)
         {
             return;
         }
-        int x = minmax.getBestShopID();
         if(shopList.get(x).getCurrentCapacity() >= shopList.get(x).getShopCapacity())
         {
             return;
         }
-        shopList.get(x).sellProduct(minmax.getItem().getItemID(),minmax,minmax.getBestShopID());
+        else
+        {
+            shopList.get(x).sellProduct(minmax.getItem().getItemID(),minmax,x);
+        }
     }
     private void resetCapacity()
     {

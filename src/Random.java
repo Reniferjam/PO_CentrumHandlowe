@@ -8,7 +8,7 @@ public class Random extends Client implements IClient
         super(item);
         this.randomShopID = -1;
     }
-    public void findShop(ArrayList<Shop> shopList) // +1 modulo numberOfShops do dokonczenia
+    public void findShop(ArrayList<Shop> shopList)
     {
         randomShopID = (int)(Math.random()*( shopList.size() ));
     }
