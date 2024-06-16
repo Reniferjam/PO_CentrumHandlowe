@@ -1,6 +1,9 @@
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Item is a product in a shop, which client can buy.
+ */
 public class Item
 {
     private String itemName;
@@ -14,7 +17,7 @@ public class Item
         this.itemQuality = itemQuality;
         this.itemPrice = itemPrice;
     }
-    private Item() // konstruktor domyślny Itemu
+    private Item() //default constructor of Item
     {
         this.itemName = "ERROR";
         this.itemID = -1;

@@ -4,14 +4,17 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
+/**
+ * Shopping mall is a collection of different shops.
+ */
 public class ShoppingMall {
     private  int maxClients, numberOfRounds;
     private int chanceOfRandomClient;
     private int minQuality, maxQuality;
     private double minPrice, maxPrice;
     public ArrayList<Shop> shopList;
-
     private int itemCount;
+
     public ShoppingMall(int maxClients, int chanceOfRandomClient, int minQuality, int maxQuality, double minPrice, double maxPrice, int itemCount)
     {
         this.chanceOfRandomClient = chanceOfRandomClient;
@@ -24,12 +27,17 @@ public class ShoppingMall {
         this.shopList = new ArrayList<Shop>();
         this.itemCount = itemCount;
     }
+    /**
+     * Method is randomizing if it create a random or minmax client.
+     * Then it simulates a round for that client.
+     * It also increase a number of rounds simulated.
+     */
     public void nextRound()
     {
         resetCapacity();
         for (int i = 0; i <maxClients; i++)
         {
-            int x = (int)(Math.random() * (101)); // losuje liczbe od 0 do 100
+            int x = (int)(Math.random() * (101));
             if (x < chanceOfRandomClient)
             {
                 roundForRandom();
@@ -42,6 +50,10 @@ public class ShoppingMall {
         Shop.printShops(shopList,numberOfRounds);
         numberOfRounds++;
     }
+
+    /**
+     * It simulates a round for a client that is choosing a random shop to buy his product.
+     */
     public void roundForRandom()
     {
         Random rand = new Random(randomizeVariables(), shopList.size());
@@ -63,6 +75,10 @@ public class ShoppingMall {
             }
         }
     }
+
+    /**
+     * It simulates a round for a client that is choosing the best shop to buy his product.
+     */
     public void roundForMinMax()
     {
         MinMax minmax = new MinMax(randomizeVariables());
@@ -87,6 +103,12 @@ public class ShoppingMall {
             shop.setCurrentCapacity(0);
         }
     }
+
+    /**
+     * Method is randomizing attributes of an item, which depends on variables set earlier.
+     *
+     * @return it returns new item with randomized variables
+     */
     public Item randomizeVariables()
     {
         int quality = (int)(Math.random() * (maxQuality - minQuality + 1) + minQuality);
@@ -94,6 +116,10 @@ public class ShoppingMall {
         int id = (int)((Math.random() * (itemCount))+1);
         return new Item(" ", id, 1, quality, price);
     }
+    /**
+     * Method for collecting data.
+     * It stores it later in a .csv file.
+     */
         public void collectData()
         {
             try

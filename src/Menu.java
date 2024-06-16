@@ -4,6 +4,10 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Menu is a centre of a simulation.
+ * It creates a shopping mall and shops within.
+ */
 public class Menu
 {
     private ShoppingMall shoppingMall;
@@ -11,6 +15,11 @@ public class Menu
     {
             this.shoppingMall = new ShoppingMall(400,70,20,80,40,600,4);
     }
+
+    /**
+     * Method that is asking user for an input, whether he wants to continue the simulation or not.
+     * It also starts whole simulation.
+     */
     public  void startSimulation()
     {
         createShops();
@@ -44,6 +53,10 @@ public class Menu
             }
         }
     }
+
+    /**
+     * Method that is used to create shops, with certain items added to their stock.
+     */
     public void createShops()
     {
         ArrayList<Item> list = new ArrayList<Item>();

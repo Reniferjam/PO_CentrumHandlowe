@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * It represents a shop with certain variables.
+ * It belongs to the shopping mall.
+ */
 public class Shop
 {
     private int shopCapacity;
@@ -8,10 +12,10 @@ public class Shop
     private int shopTax;
     private double shopProfit;
     private int currentCapacity = 0;
-    private double profitOnClient; // wartość średniego zarobku na jednego klienta
+    private double profitOnClient; //average profit on one client
     private int soldProducts=0;
-    private ArrayList<Item> itemList = new ArrayList<Item>(); // ArrayLista itemów
-    Shop(int shopTax, ArrayList<Item> itemList, int shopCapacity) // konstruktor sklepu
+    private ArrayList<Item> itemList = new ArrayList<Item>(); // ArrayList of items
+    Shop(int shopTax, ArrayList<Item> itemList, int shopCapacity) //constructor of a shop
     {
         this.shopIncome = 0;
         this.shopTax = shopTax;
@@ -21,7 +25,7 @@ public class Shop
         this.currentCapacity = 0;
         this.profitOnClient = 0;
     }
-    Shop() // konstruktor domyślny sklepu
+    Shop() //default constructor of a shop
     {
         this.shopIncome = -1;
         this.shopTax = -1;
@@ -31,7 +35,16 @@ public class Shop
         this.currentCapacity = -1;
         this.profitOnClient = 0;
     }
-    public void sellProduct(int itemID,Client client,int ShopID) // do poprawienia
+    /**
+     * This method is making an operation of selling a product.
+     * It has a specified itemID, Client and ShopID, for the Item it is selling.
+     * It increases a current capacity of a shop and a number of sold products.
+     *
+     * @param itemID id of a selling item
+     * @param client client who is buying an item
+     * @param ShopID id of a shop that is selling an item
+     */
+    public void sellProduct(int itemID,Client client,int ShopID)
     {
         for (int n = 0; n < itemList.size(); n++)
         {
@@ -82,11 +95,16 @@ public class Shop
     public void setProfitOnClient(double profitOnClient) {
         this.profitOnClient = profitOnClient;
     }
-
     public int getSoldProducts() {
         return soldProducts;
     }
 
+    /**
+     * Method that is printing a table with store statistics data.
+     *
+     * @param shopList list of shops in shopping mall
+     * @param numberOfRounds number of current round
+     */
     public static void printShops(ArrayList<Shop> shopList, int numberOfRounds)
     {
         System.out.printf("Round %2d |  income  |  profit  | prof/cli | currentCap | capacity |" ,numberOfRounds+1);
